@@ -73,17 +73,18 @@ public class Base {
 		//wait.until(ExpectedConditions.elementToBeClickable(cart)).click();
 		buy.click();
 		Thread.sleep(2000);
-//	}
-//	
-//	@Test(priority = 3)
-//	public void credentials() throws InterruptedException, AWTException
-//	{ 
-//		
-//		js=(JavascriptExecutor) driver;
-//		wait=new WebDriverWait(driver,Duration.ofSeconds(5));
+	}
+	
+	@Test(priority = 3)
+	public void credentials() throws InterruptedException, AWTException
+	{ 
+		//to add credentials for login
+		
+	js=(JavascriptExecutor) driver;
+		wait=new WebDriverWait(driver,Duration.ofSeconds(5));
 //WebElement mob= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[.='Enter Email/Mobile number']")));
-      WebElement mob=driver.findElement(By.xpath("//span[text()='Enter Email/Mobile number']"));
-		mob.sendKeys("8123023821");
+      WebElement mob=driver.findElement(By.xpath("//input[@type='text']"));
+		mob.sendKeys("vaibhavmkumakale@gmail.com");
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
 		WebElement otp = driver.findElement(By.xpath("//span[.='Enter OTP']"));
@@ -94,7 +95,7 @@ public class Base {
 	@Test(priority = 4)
 	public void addAddress() throws InterruptedException
 	{
-		driver.findElement(By.xpath("//button[.='Deliver Here']")).click();
+		driver.findElement(By.xpath("(//button[normalize-space()='Deliver Here']")).click();
 		Thread.sleep(2000);
 		
 		driver.findElement(By.xpath("//button[.='CONTINUE']")).click();
@@ -106,11 +107,11 @@ public class Base {
 	public void cardDetails() throws InterruptedException
 	{
 		js=(JavascriptExecutor) driver;
-		WebElement card = driver.findElement(By.xpath("//span[.='Credit / Debit / ATM Card']"));
-		js.executeScript("argument[0].scrollIntoView();", card);
+		WebElement card = driver.findElement(By.xpath("//label[@for='CREDIT']//div[@class='_9-suWS']"));
+		js.executeScript("arguments[0].scrollIntoView(true);", card);
 		card.click();
 		
-		WebElement cardno = driver.findElement(By.xpath("//label[text()='Enter Card Number']"));
+		WebElement cardno = driver.findElement(By.xpath("//input[@name='cardNumber']"));
 		cardno.sendKeys("4242424242424242");
 		WebElement month = driver.findElement(By.xpath("//select[@name='month']"));
 		sel=new Select(month);
@@ -120,20 +121,22 @@ public class Base {
 		sel.selectByVisibleText("25");
 		driver.findElement(By.xpath("//input[@name='cvv']")).sendKeys("123");
 		Thread.sleep(1000);
-		driver.findElement(By.xpath("//label[.='Zip/Pincode']")).sendKeys("560055");
-		WebElement country = driver.findElement(By.xpath("//select[@name='billing_country']"));
+		driver.findElement(By.xpath("(//input[@name='billing_pincode'])[1]")).sendKeys("560055");
+		WebElement country = driver.findElement(By.xpath("(//select[@name='billing_country'])[1]"));
 		sel=new Select(country);
 		sel.selectByVisibleText("India");
 		driver.findElement(By.xpath("//input[@name='billing_city']")).sendKeys("Bangalore");
 		driver.findElement(By.xpath("//input[@name='billing_state']")).sendKeys("Bangalore");
 		driver.findElement(By.xpath("//textarea[@name='billing_address']")).sendKeys("Bangalore");
 		driver.findElement(By.xpath("//button[@type='button']")).click();
+		
+		Thread.sleep(2000);
 	}
 	
-//	@AfterTest
-//	public void closebrowse()
-//	{
-//		driver.quit();
-//	}
+   @AfterTest
+	public void closebrowse()
+	{
+		driver.quit();
+	}
 
 }
